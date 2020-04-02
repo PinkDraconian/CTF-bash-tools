@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 #
 # Script to add aliases for all the scripts to ~/.bash_aliases

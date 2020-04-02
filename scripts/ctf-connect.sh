@@ -1,4 +1,4 @@
-#!/usr/bin/bash
+#!/bin/bash
 
 #
 # Script to create a connect.sh file that can be used to connect to a challenge
@@ -22,7 +22,7 @@ if [ -f connect.sh ]; then
 fi
 
 # Creating and filling file
-echo "#!/usr/bin/bash
+echo "#!/bin/bash
 
 nc $1 $2" > connect.sh
 
