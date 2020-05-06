@@ -18,4 +18,4 @@ echo "Aliases have been added! You can now use
 	'ctf-connect ip port' to create a connect.sh script
 	'ctf-ex cmd' to see examples of a certain command
 In order to use these, either run 'source ~/.bashrc' or restart the terminal.
-If you upgraded the script, you can delete the old entries from ~/.bashrc"
+If you upgraded the script, you can delete the old entries from ~/.bash_aliases"
