@@ -14,16 +14,16 @@ option=$(tr '[:upper:]' '[:lower:]' <<< "$1")  # Convert command choice to lower
 
 if [[ $option == "-h" || $# != 1 ]]; then
 	echo "Usage: ctf-ex <CMD>
-Commands implemented:
+Commands implemented
 	- gobuster
 	- tty
 	- john
 	- ping"
 elif [[ $option == "gobuster" ]]; then
-	echo "Enumerate directories on HTTP: 
-	'gobuster dir --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]'
-Enumerate directories on HTTPS: 
-	'gobuster dir -k --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]'"
+	echo "Enumerate directories on HTTP:
+	gobuster dir --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]
+Enumerate directories on HTTPS:
+	gobuster dir -k --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]"
 elif [[ $option == "tty" ]]; then
 	echo "Fully upgrading to TTY shell
 	python3 -c 'import pty; pty.spawn(\"/bin/bash\")'
