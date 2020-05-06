@@ -15,4 +15,5 @@ alias ctf-connect=\"$(pwd)/scripts/ctf-connect.sh\"" >> ~/.bash_aliases
 echo "Aliases have been added! You can now use
 	'ctf-py' to create a solve.py script
 	'ctf-connect ip port' to create a connect.sh script
-In order to use these, either run 'source ~/.bashrc' or restart the terminal"
+In order to use these, either run 'source ~/.bashrc' or restart the terminal.
+If you upgraded the script, you can delete the old entries from ~/.bashrc"
