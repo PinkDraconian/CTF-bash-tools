@@ -4,6 +4,7 @@ Toolset for automating common management actions used in CTF's
 ## Tools
 - `ctf-py` to create a solve.py script
 - `ctf-connect ip port` to create a connect.sh script
+- `ctf-ex cmd` to see examples of a certain command
 
 ## Installation
 ```bash
