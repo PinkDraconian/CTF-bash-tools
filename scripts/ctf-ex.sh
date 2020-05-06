@@ -16,7 +16,9 @@ if [[ $option == "-h" || $# != 1 ]]; then
 	echo "Usage: ctf-ex <CMD>
 Commands implemented:
 	- gobuster
-	- tty"
+	- tty
+	- john
+	- ping"
 elif [[ $option == "gobuster" ]]; then
 	echo "Enumerate directories on HTTP: 
 	'gobuster dir --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]'
