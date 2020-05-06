@@ -5,6 +5,7 @@
 # Following commands can be used:
 # 	- gobuster
 # 	- tty (How to upgrade a shell to tty)
+#	- john
 # Usage: ctf-ex <CMD>
 #
 
@@ -30,4 +31,7 @@ elif [[ $option == "tty" ]]; then
 	export SHELL=bash
 	export TERM=xterm-256color
 	stty rows 24 columns 121"
+elif [[ $option == "john" ]]; then
+	echo "Cracking hash
+	john --wordlist=/usr/share/wordlists/rockyou.txt hash_file"
 fi
