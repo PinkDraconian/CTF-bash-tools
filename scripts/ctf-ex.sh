@@ -6,6 +6,7 @@
 # 	- gobuster
 # 	- tty (How to upgrade a shell to tty)
 #	- john
+#	- ping (Set up a ping listen)
 # Usage: ctf-ex <CMD>
 #
 
@@ -34,4 +35,7 @@ elif [[ $option == "tty" ]]; then
 elif [[ $option == "john" ]]; then
 	echo "Cracking hash
 	john --wordlist=/usr/share/wordlists/rockyou.txt hash_file"
+elif [[ $option == "ping" ]]; then
+	echo "Setting up listener for pings
+	tcpdump -i tun0 icmp and icmp[icmptype]=icmp-echo"
 fi
