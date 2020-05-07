@@ -7,6 +7,7 @@
 # 	- tty (How to upgrade a shell to tty)
 #	- john
 #	- ping (Set up a ping listen)
+#	- find
 # Usage: ctf-ex <CMD>
 #
 
@@ -18,7 +19,8 @@ Commands implemented
 	- gobuster
 	- tty
 	- john
-	- ping"
+	- ping
+	- find"
 elif [[ $option == "gobuster" ]]; then
 	echo "Enumerate directories on HTTP:
 	gobuster dir --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]
@@ -40,4 +42,7 @@ elif [[ $option == "john" ]]; then
 elif [[ $option == "ping" ]]; then
 	echo "Setting up listener for pings
 	tcpdump -i tun0 icmp and icmp[icmptype]=icmp-echo"
+elif [[ $option == "find" ]]; then
+	echo "Finding a file and dismissing permission denied messages
+	find / -type f -name \"keyword\" 2>&1 | grep -v \"Permission denied\""
 fi
