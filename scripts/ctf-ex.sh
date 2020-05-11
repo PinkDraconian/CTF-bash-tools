@@ -8,6 +8,7 @@
 #	- john
 #	- ping (Set up a ping listen)
 #	- find
+#	- pwntools
 # Usage: ctf-ex <CMD>
 #
 
@@ -20,7 +21,8 @@ Commands implemented
 	- tty
 	- john
 	- ping
-	- find"
+	- find
+	- pwntools"
 elif [[ $option == "gobuster" ]]; then
 	echo "Enumerate directories on HTTP:
 	gobuster dir --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]
@@ -45,4 +47,9 @@ elif [[ $option == "ping" ]]; then
 elif [[ $option == "find" ]]; then
 	echo "Finding a file and dismissing permission denied messages
 	find / -type f -name \"keyword\" 2>&1 | grep -v \"Permission denied\""
+elif [[ $option == "pwntools" ]]; then
+	echo "Making a remote connection
+	io = remote('ip', port)
+Setting debug mode
+	context.log_level = 'DEBUG'"
 fi
