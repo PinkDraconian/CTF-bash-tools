@@ -9,6 +9,7 @@
 #	- ping (Set up a ping listen)
 #	- find
 #	- pwntools
+#	- sqlmap
 # Usage: ctf-ex <CMD>
 #
 
@@ -22,7 +23,8 @@ Commands implemented
 	- john
 	- ping
 	- find
-	- pwntools"
+	- pwntools
+	- sqlmap"
 elif [[ $option == "gobuster" ]]; then
 	echo "Enumerate directories on HTTP:
 	gobuster dir --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]
@@ -54,4 +56,9 @@ elif [[ $option == "pwntools" ]]; then
 	io = remote('ip', port)
 Setting debug mode
 	context.log_level = 'DEBUG'"
+elif [[ $option == "sqlmap" ]]; then
+	echo "SQLi testing from saved request from burp
+	sqlmap --level 5 --risk 3 --batch -r <FILE>
+SQLi from GET request
+	sqlmap --level 5 --risk 3 --batch -u <URL>"
 fi
