@@ -27,7 +27,9 @@ elif [[ $option == "gobuster" ]]; then
 	echo "Enumerate directories on HTTP:
 	gobuster dir --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]
 Enumerate directories on HTTPS:
-	gobuster dir -k --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]"
+	gobuster dir -k --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]
+Enumerate vhosts:
+	gobuster vhost --wordlist /usr/share/wordlists/SecLists/Discovery/DNS/fierce-hostlist.txt --url <URL>"
 elif [[ $option == "tty" ]]; then
 	echo "Fully upgrading to TTY shell
 	python3 -c 'import pty; pty.spawn(\"/bin/bash\")'
