@@ -10,6 +10,7 @@
 #	- find
 #	- pwntools
 #	- sqlmap
+# 	- crackmapexec
 # Usage: ctf-ex <CMD>
 #
 
@@ -25,6 +26,11 @@ Commands implemented
 	- find
 	- pwntools
 	- sqlmap"
+elif [[ $option == "crackmapexec" ]]; then
+	echo "Bruteforce smb
+	crackmapexec smb 10.10.10.192 -u users -p pass
+Bruteforce winrm
+	crackmapexec winrm 10.10.10.192 -u users -p pass"
 elif [[ $option == "gobuster" ]]; then
 	echo "Enumerate directories on HTTP:
 	gobuster dir --wordlist /usr/share/wordlists/dirb/big.txt --url <URL> [-x <EXTENSIONS, CSV>] [-o <OUTFILE>]
