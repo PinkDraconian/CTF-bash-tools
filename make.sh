@@ -11,7 +11,8 @@ echo "
 alias ctf-py=\"$(pwd)/scripts/ctf-py.sh\"
 alias ctf-connect=\"$(pwd)/scripts/ctf-connect.sh\"
 alias ctf-ex=\"$(pwd)/scripts/ctf-ex.sh\"
-alias ctf-ssh=\"$(pwd)/scripts/ctf-ssh.sh\"" >> ~/.bash_aliases
+alias ctf-ssh=\"$(pwd)/scripts/ctf-ssh.sh\"
+alias ctf-wordlist-names=\"$(pwd)/scripts/ctf-wordlist-names.sh\"" >> ~/.bash_aliases
 
 # Prompt user to source ~/.bashrc or restart the terminal
 echo "Aliases have been added! You can now use

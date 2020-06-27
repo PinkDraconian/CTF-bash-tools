@@ -6,6 +6,7 @@ Toolset for automating common management actions used in CTF's
 - `ctf-connect ip port` to create a connect.sh script
 - `ctf-ex cmd` to see examples of a certain command
 - `ctf-ssh` to generate an rsa keypair for ssh login
+- `ctf-wordlist-names names-file` to generate a wordlist from first and last names
 
 ## Installation
 ```bash
@@ -14,6 +15,9 @@ cd CTF-bash-tools
 ./make.sh
 source ~/.bashrc
 ```
+
+## Credits
+- Thanks to [OneMask](https://gitlab.com/onemask) for writing the ctf-wordlist-names bash code!
 
 ## Ending words
 Thanks for using these tools.
