@@ -11,6 +11,7 @@
 #	- pwntools
 #	- sqlmap
 # 	- crackmapexec
+# 	- smbclient.py
 # Usage: ctf-ex <CMD>
 #
 
@@ -20,12 +21,14 @@ if [[ $option == "-h" || $# != 1 ]]; then
 	echo "Usage: ctf-ex <CMD>
 Commands implemented
 	- gobuster
+	- crackmapexec
 	- tty
 	- john
 	- ping
 	- find
 	- pwntools
-	- sqlmap"
+	- sqlmap
+	- smbclient.py"
 elif [[ $option == "crackmapexec" ]]; then
 	echo "Bruteforce smb
 	crackmapexec smb 10.10.10.192 -u users -p pass
@@ -62,6 +65,9 @@ elif [[ $option == "pwntools" ]]; then
 	io = remote('ip', port)
 Setting debug mode
 	context.log_level = 'DEBUG'"
+elif [[ $option == "smbclient.py" ]]; then
+	echo "Login
+smbclient.py DOMAIN/USERNAME:PASS@IP"
 elif [[ $option == "sqlmap" ]]; then
 	echo "SQLi testing from saved request from burp
 	sqlmap --level 5 --risk 3 --batch -r <FILE>
