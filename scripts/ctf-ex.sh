@@ -12,6 +12,7 @@
 #	- sqlmap
 # 	- crackmapexec
 # 	- smbclient.py
+#	- mount
 # Usage: ctf-ex <CMD>
 #
 
@@ -28,7 +29,8 @@ Commands implemented
 	- find
 	- pwntools
 	- sqlmap
-	- smbclient.py"
+	- smbclient.py
+	- mount"
 elif [[ $option == "crackmapexec" ]]; then
 	echo "Bruteforce smb
 	crackmapexec smb 10.10.10.192 -u users -p pass
@@ -54,6 +56,9 @@ elif [[ $option == "tty" ]]; then
 elif [[ $option == "john" ]]; then
 	echo "Cracking hash
 	john --wordlist=/usr/share/wordlists/rockyou.txt hash_file"
+elif [[ $option == "mount" ]]; then
+	echo "Mount a shared folder
+	mount -t cifs -o username=user,password=password //x.x.x.x/share /mnt/share"
 elif [[ $option == "ping" ]]; then
 	echo "Setting up listener for pings
 	tcpdump -i tun0 icmp and icmp[icmptype]=icmp-echo"
@@ -67,7 +72,7 @@ Setting debug mode
 	context.log_level = 'DEBUG'"
 elif [[ $option == "smbclient.py" ]]; then
 	echo "Login
-smbclient.py DOMAIN/USERNAME:PASS@IP"
+	smbclient.py DOMAIN/USERNAME:PASS@IP"
 elif [[ $option == "sqlmap" ]]; then
 	echo "SQLi testing from saved request from burp
 	sqlmap --level 5 --risk 3 --batch -r <FILE>
