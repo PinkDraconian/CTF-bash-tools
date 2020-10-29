@@ -1,5 +1,5 @@
 #!/bin/bash
-#TODO: gdb/volatility/tcpdump/tshark/ssh/netcat/linux/recon-ng/links
+#TODO: volatility/tcpdump/tshark/ssh/netcat/linux/recon-ng/links
 #
 # Can display examples for how commands are structured
 # Following commands can be used
@@ -24,6 +24,7 @@ option=$(tr '[:upper:]' '[:lower:]' <<< "$1")  # Convert command choice to lower
 if [[ $option == "-h" || $# != 1 ]]; then
 	echo "Usage: ctf-ex <CMD>
 Commands implemented
+	- gdb 
 	- linux
 	- msfvenom
 	- wfuzz
@@ -279,4 +280,42 @@ Python shell
 Linux meterpreter bind shell x86 multi stage
 	msfvenom -p linux/x86/meterpreter/bind_tcp RHOST=IP LPORT=PORT -f elf > shell.elf		
 	"		 
+
+elif [[ $option == "gdb" ]]; then 
+	echo "load the binary with args arguments
+	gdb --args binary arguments
+Launch gdb with a process 
+	gdb --pid <PID> 
+set arguments
+	set args <args...>
+Launch the binary with stdin data
+	r < <(perl -e 'print \"A\"x5')
+Show values as hex
+	p/x 10+12
+show shared libraries
+	info sharedlibrary	
+Check the registers
+	info registers
+check value of a specified register 
+	$<register>
+check the break points 
+	info break
+set a break point in an Address
+	break *Address
+delete all breakpoints
+	clear
+remove a breakpoint
+	delete <breakpoint#>
+disable a breakpoint
+	disable <breakpoint#>	
+Force the current function to return im-mediately, passing the given value
+	return <expression>
+turn asm syntax to intel
+	set disassembly-flavor intel
+step one machine code instruction
+	stepi
+continue until current function return
+	finish	 	
+"
+
 fi
