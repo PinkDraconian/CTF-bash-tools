@@ -1,6 +1,5 @@
 #!/bin/bash
 #TODO: volatility/tcpdump/tshark/ssh/netcat/linux/recon-ng/links
-#
 # Can display examples for how commands are structured
 # Following commands can be used
 #	- curl
@@ -24,6 +23,7 @@ option=$(tr '[:upper:]' '[:lower:]' <<< "$1")  # Convert command choice to lower
 if [[ $option == "-h" || $# != 1 ]]; then
 	echo "Usage: ctf-ex <CMD>
 Commands implemented
+	- pwn
 	- gdb 
 	- linux
 	- msfvenom
@@ -44,7 +44,7 @@ Commands implemented
 	- mount"
 
 elif [[ $option == "linux" ]]; then
-	echo "enable logging record the interactive session
+	echo "Enable logging record the interactive session
 	script <filename>
 close script session 
 	ctrl + D	
@@ -66,6 +66,12 @@ check initab
 	cat /etc/inittab
 check shared memory 
 	ipcs -mp
+check the login activity
+	last
+monitor network trafic 
+	sudo iftop  <interface>
+investigate sockets 
+	ss -nlpt			
 	"	
 
 elif [[ $option == "crackmapexec" ]]; then
@@ -290,6 +296,8 @@ set arguments
 	set args <args...>
 Launch the binary with stdin data
 	r < <(perl -e 'print \"A\"x5')
+load a plugin inside gdb 
+	source </path/to/plugin>	
 Show values as hex
 	p/x 10+12
 show shared libraries
@@ -298,6 +306,10 @@ Check the registers
 	info registers
 check value of a specified register 
 	$<register>
+show memory at given adress in hex
+	x/x $esp
+show the instruction on eip 
+	x/i $eip		
 check the break points 
 	info break
 set a break point in an Address
@@ -315,7 +327,30 @@ turn asm syntax to intel
 step one machine code instruction
 	stepi
 continue until current function return
-	finish	 	
+	finish
+show the stack frame info 
+	info frame
+attach network process
+	set follow-fork-mode child	 		 	
 "
+
+elif [[ $option == "pwn" ]]; then 
+	echo "Check property of a binary_file
+	checksec binary
+Check file type
+	file binary_file
+Disassemble with intel syntax
+	objdump -M intel -d program_name	
+Output kernel message
+	dmesg
+Display headers of an elf file
+	readelf -l binary_file	
+Display program sections size
+	size binary_file
+Output dynamic realocation
+	objdump -r binary_file
+Disbale ASLR 	
+	echo 0 > /proc/sys/kernel/randomize_va_space
+	"
 
 fi
