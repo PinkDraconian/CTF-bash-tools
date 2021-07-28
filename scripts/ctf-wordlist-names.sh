@@ -20,7 +20,6 @@ cat $1 | while read line; do
 	lastname=$(echo $line | cut -d ' ' -f2 | tr '[:upper:]' '[:lower:]')
 	echo "$firstname.$lastname
 $(echo $firstname | cut -c1).$lastname
-$(echo $firstname | cut -c1).$lastname
 $(echo $firstname | cut -c1)-$lastname
 $firstname$lastname
 $firstname-$lastname
